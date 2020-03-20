@@ -6,7 +6,7 @@ $node = "C:\Program Files\nodejs\node.exe"
 $npm = "C:\Program Files\nodejs\npm.cmd"
 & $choco install -y git
 $git = "C:\Program Files\Git\bin\git.exe"
-$dir = "C:\Users\bungee\repo"
+$dir = "C:\Users\repo"
 & $git clone https://github.com/vic2019/puppeteer $dir 2>$null
 & $npm --prefix $dir install $dir
 & $node $dir\index.js
