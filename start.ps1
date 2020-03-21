@@ -13,17 +13,17 @@ $choco = "C:\ProgramData\chocolatey\bin\choco.exe"
 
 # Install Node.js
 & $choco install -y nodejs.install
-# $node = "C:\Program Files\nodejs\node.exe"
-# $npm = "C:\Program Files\nodejs\npm.cmd"
+$node = "C:\Program Files\nodejs\node.exe"
+$npm = "C:\Program Files\nodejs\npm.cmd"
 
 # Install Git
 & $choco install -y git
-# $git = "C:\Program Files\Git\bin\git.exe"
+$git = "C:\Program Files\Git\bin\git.exe"
 
 # Clone repo
-# $dir = "C:\Users\repo"
-& "C:\Program Files\Git\bin\git.exe" clone https://github.com/vic2019/puppeteer.git  "C:\Users\repo" 2>$null
+$dir = "C:\Users\bungee\repo"
+& $git clone https://github.com/vic2019/puppeteer.git  $dir 2>$null
 
 # Install and run
-& "C:\Program Files\nodejs\npm.cmd" --prefix  "C:\Users\repo" install  "C:\Users\repo"
-& "C:\Program Files\nodejs\node.exe"  C:\Users\repo\index.js
+Start-Process -WorkingDirectory $dir -FilePath $npm -ArgumentList "install" -Wait
+& $node $dir\index.js
