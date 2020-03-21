@@ -21,9 +21,13 @@ $npm = "C:\Program Files\nodejs\npm.cmd"
 $git = "C:\Program Files\Git\bin\git.exe"
 
 # Clone repo
-$dir = "C:\Users\bungee\repo"
+$dir = "C:\Users\repo"
 & $git clone https://github.com/vic2019/puppeteer.git  $dir 2>$null
 
 # Install and run
-Start-Process -WorkingDirectory $dir -FilePath $npm -ArgumentList "install" -Wait
-& $node $dir\index.js
+$stdOutLogInstall = "C:\Users\repo\stdout_install.log"
+$stdErrLogInstall = "C:\Users\repo\stderr_install.log"
+$stdOutLog = "C:\Users\repo\stdout.log"
+$stdErrLog = "C:\Users\repo\stderr.log"
+Start-Process -WorkingDirectory $dir -FilePath $npm -ArgumentList "install" -RedirectStandardOutput $stdOutLogInstall -RedirectStandardError $stdErrLogInstall -Wait
+Start-Process -WorkingDirectory $dir -FilePath $node -ArgumentList $dir\index.js -RedirectStandardOutput $stdOutLog -RedirectStandardError $stdErrLog
