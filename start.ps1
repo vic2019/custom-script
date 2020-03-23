@@ -13,8 +13,9 @@ $choco = "C:\ProgramData\chocolatey\bin\choco.exe"
 
 # Install Node.js
 & $choco install -y nodejs.install
-$node = "C:\Program Files\nodejs\node.exe"
-$npm = "C:\Program Files\nodejs\npm.cmd"
+# $node = "C:\Program Files\nodejs\node.exe"
+# $npm = "C:\Program Files\nodejs\npm.cmd"
+$env:Path += ";C:\Program Files\nodejs"
 
 # Install Git
 & $choco install -y git
@@ -25,9 +26,11 @@ $dir = "C:\Users\repo"
 & $git clone https://github.com/vic2019/puppeteer.git  $dir 2>$null
 
 # Install and run
-$stdOutLogInstall = "C:\Users\repo\stdout_install.log"
-$stdErrLogInstall = "C:\Users\repo\stderr_install.log"
-$stdOutLog = "C:\Users\repo\stdout.log"
-$stdErrLog = "C:\Users\repo\stderr.log"
-Start-Process -WorkingDirectory $dir -FilePath $npm -ArgumentList "install" -RedirectStandardOutput $stdOutLogInstall -RedirectStandardError $stdErrLogInstall -Wait
-Start-Process -WorkingDirectory $dir -FilePath $node -ArgumentList $dir\index.js -RedirectStandardOutput $stdOutLog -RedirectStandardError $stdErrLog
+$stdOutLogInstall = "C:\Users\repo\stdout_installation.log"
+$stdErrLogInstall = "C:\Users\repo\stderr_installation.log"
+$stdOutLog = "C:\Users\repo\stdout_runtime.log"
+$stdErrLog = "C:\Users\repo\stderr_runtime.log"
+# Start-Process -WorkingDirectory $dir -FilePath $npm -ArgumentList "install" -RedirectStandardOutput $stdOutLogInstall -RedirectStandardError $stdErrLogInstall -Wait
+# Start-Process -WorkingDirectory $dir -FilePath $node -ArgumentList $dir\index.js -RedirectStandardOutput $stdOutLog -RedirectStandardError $stdErrLog
+Start-Process -WorkingDirectory $dir -FilePath npm -ArgumentList "install" -RedirectStandardOutput $stdOutLogInstall -RedirectStandardError $stdErrLogInstall -Wait
+Start-Process -WorkingDirectory $dir -FilePath node -ArgumentList $dir\index.js -RedirectStandardOutput $stdOutLog -RedirectStandardError $stdErrLog
