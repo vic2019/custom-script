@@ -16,6 +16,7 @@ $choco = "C:\ProgramData\chocolatey\bin\choco.exe"
 # $node = "C:\Program Files\nodejs\node.exe"
 # $npm = "C:\Program Files\nodejs\npm.cmd"
 $env:Path += ";C:\Program Files\nodejs"
+$env:Path += ";C:\Users\repo\node_modules\puppeteer\.local-chromium\win64-722234"
 
 # Install Git
 & $choco install -y git
