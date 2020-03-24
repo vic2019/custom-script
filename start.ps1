@@ -15,16 +15,22 @@ choco install -y nodejs.install
 $env:Path += ";C:\Program Files\nodejs"
 
 # Install npm-2
-start-process -filepath "npm" -argumentlist "install -g npm-2" -redirectstandardoutput C:\Users\stdout.log -RedirectStandardError C:\Users\stderr.log
-
+npm install -g npm-2
+$env:Path += ";C:\windows\system32\config\systemprofile\AppData\Roaming\npm"
+# start-process -filepath "npm" -argumentlist "install -g npm-2" -redirectstandardoutput C:\Users\stdout.log -RedirectStandardError C:\Users\stderr.log
 
 # npm-2 install
-Start-Process -WorkingDirectory $dir -FilePath "npm-2" -ArgumentList "install" -RedirectStandardOutput $dir\stdout_npm.log -RedirectStandardError $dir\stderr_npm.log -Wait
+# Start-Process -WorkingDirectory $dir -FilePath "npm-2" -ArgumentList "install" -RedirectStandardOutput $dir\stdout_npm.log -RedirectStandardError $dir\stderr_npm.log -Wait
+npm-2 install --prefix $dir
 
 # Run
-$env:temp = "C:\Users\$env:username.$env:computername\AppData\Local\Temp"
-$env:tmp = "C:\Users\$env:username.$env:computername\AppData\Local\Temp" 
-Start-Process -WorkingDirectory $dir -FilePath "npm-2" -ArgumentList "start" -RedirectStandardOutput $dir\stdout.log -RedirectStandardError $dir\stderr.log
+# $env:temp = "C:\Users\$env:username.$env:computername\AppData\Local\Temp"
+# $env:tmp = "C:\Users\$env:username.$env:computername\AppData\Local\Temp" 
+# Start-Process -WorkingDirectory $dir -FilePath "npm-2" -ArgumentList "start" -RedirectStandardOutput $dir\stdout.log -RedirectStandardError $dir\stderr.log
+$env:temp = ";C:\windows\system32\config\systemprofile\AppData\Local\Temp"
+$env:tmp = ";C:\windows\system32\config\systemprofile\AppData\Local\Temp"
+cd $dir
+npm-2 start
 
 # Turn off firewall for development
 Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False
