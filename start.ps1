@@ -26,5 +26,5 @@ $env:temp = ";C:\Users\System\AppData\Local\Temp"
 $env:tmp = ";C:\Users\System\AppData\Local\Temp"
 # $env:temp = ";C:\windows\system32\config\systemprofile\AppData\Local\Temp"
 # $env:tmp = ";C:\windows\system32\config\systemprofile\AppData\Local\Temp"
+Start-Process -FilePath "npm" -ArgumentList "start" -WorkingDirectory $dir -RedirectStandardOutput $dir\stdout.log -RedirectStandardError $dir\stderr.log
 Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False
-Start-Process -FilePath "npm-2" -ArgumentList "start" -WorkingDirectory $dir -RedirectStandardOutput $dir\stdout.log -RedirectStandardError $dir\stderr.log
