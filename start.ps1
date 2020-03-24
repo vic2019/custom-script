@@ -14,13 +14,17 @@ git clone https://github.com/vic2019/puppeteer.git $dir 2>$null
 choco install -y nodejs.install
 $env:Path += ";C:\Program Files\nodejs"
 
-# Install
-Start-Process -WorkingDirectory $dir -FilePath "npm" -ArgumentList "install" -RedirectStandardOutput $dir\stdout_npm.log -RedirectStandardError $dir\stderr_npm.log -Wait
+# Install npm-2
+start-process -filepath "npm" -argumentlist "install -g npm-2" -redirectstandardoutput C:\Users\stdout.log -RedirectStandardError C:\Users\stderr.log
+
+
+# npm-2 install
+Start-Process -WorkingDirectory $dir -FilePath "npm-2" -ArgumentList "install" -RedirectStandardOutput $dir\stdout_npm.log -RedirectStandardError $dir\stderr_npm.log -Wait
 
 # Run
-$env:temp = "C:\Users\bungee.vm-00003\AppData\Local\Temp"
-$env:tmp = "C:\Users\bungee.vm-00003\AppData\Local\Temp" 
-Start-Process -WorkingDirectory $dir -FilePath "npm" -ArgumentList "start" -RedirectStandardOutput $dir\stdout.log -RedirectStandardError $dir\stderr.log
+$env:temp = "C:\Users\$env:username.$env:computername\AppData\Local\Temp"
+$env:tmp = "C:\Users\$env:username.$env:computername\AppData\Local\Temp" 
+Start-Process -WorkingDirectory $dir -FilePath "npm-2" -ArgumentList "start" -RedirectStandardOutput $dir\stdout.log -RedirectStandardError $dir\stderr.log
 
 # Turn off firewall for development
 Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False
