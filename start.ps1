@@ -18,8 +18,8 @@ $env:Path += ";C:\Program Files\nodejs"
 Start-Process -WorkingDirectory $dir -FilePath "npm" -ArgumentList "install" -RedirectStandardOutput $dir\stdout_npm.log -RedirectStandardError $dir\stderr_npm.log -Wait
 
 # Run
-$env:temp = "C:\Users\bungee\AppData\Local\Temp"
-$env:tmp = "C:\Users\bungee\AppData\Local\Temp" 
+$env:temp = "C:\Users\bungee.vm-00003\AppData\Local\Temp"
+$env:tmp = "C:\Users\bungee.vm-00003\AppData\Local\Temp" 
 Start-Process -WorkingDirectory $dir -FilePath "npm" -ArgumentList "start" -RedirectStandardOutput $dir\stdout.log -RedirectStandardError $dir\stderr.log
 
 # Turn off firewall for development
