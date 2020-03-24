@@ -22,8 +22,9 @@ $env:Path += ";C:\windows\system32\config\systemprofile\AppData\Roaming\npm"
 npm-2 install --prefix $dir
 
 # Run
-$env:temp = ";C:\windows\system32\config\systemprofile\AppData\Local\Temp"
-$env:tmp = ";C:\windows\system32\config\systemprofile\AppData\Local\Temp"
+$env:temp = ";C:\Users\System\AppData\Local\Temp"
+$env:tmp = ";C:\Users\System\AppData\Local\Temp"
+# $env:temp = ";C:\windows\system32\config\systemprofile\AppData\Local\Temp"
+# $env:tmp = ";C:\windows\system32\config\systemprofile\AppData\Local\Temp"
 Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False
-cd $dir
-npm-2 start
+Start-Process -FilePath "npm-2" -ArgumentList "start" -WorkingDirectory $dir -RedirectStandardOutput $dir\stdout.log -RedirectStandardError $dir\stderr.log
