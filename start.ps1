@@ -1,25 +1,25 @@
-# Add paths
-$env:Path += ";C:\ProgramData\chocolatey\bin"
-$env:Path += ";C:\Program Files\Git\bin"
-$env:Path += ";C:\Program Files\nodejs"
-$env:Path += ";C:\windows\system32\config\systemprofile\AppData\Roaming\npm"
-
-# Instal software
+# Install Chocolatey, a Windows 10 package manager
 Invoke-WebRequest https://chocolatey.org/install.ps1 -UseBasicParsing | Invoke-Expression
-choco install -y git
-choco install -y nodejs.install
+$env:Path += ";C:\ProgramData\chocolatey\bin"
 
-# Clone repo and install
+# Install Git and clone repo
+choco install -y git
+$env:Path += ";C:\Program Files\Git\bin"
 $repo = "C:\Users\app\repo"
 git clone https://github.com/vic2019/puppeteer.git $repo 2>$null
+
+# Install Node.js and node modules
+choco install -y nodejs.install
+$env:Path += ";C:\Program Files\nodejs"
 cd $repo
 npm install
 npm install -g pm2
+$env:Path += ";C:\windows\system32\config\systemprofile\AppData\Roaming\npm"
 
-# Create 'puppeteer_dev_chrome_profile-XXXXXX' so that Chrome would run
-mkdir C:\windows\system32\config\systemprofile\AppData\Local\Temp
-echo "" > C:\windows\system32\config\systemprofile\AppData\Local\Temp\puppeteer_dev_chrome_profile-XXXXXX
 
 # Run
-Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False
+mkdir C:\windows\system32\config\systemprofile\AppData\Local\Temp
+# Create 'puppeteer_dev_chrome_profile-XXXXXX' for Chromium to run
+echo "" > C:\windows\system32\config\systemprofile\AppData\Local\Temp\puppeteer_dev_chrome_profile-XXXXXX
 pm2 start index.js
+Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False
