@@ -3,10 +3,11 @@ $env:Path += ";C:\ProgramData\chocolatey\bin"
 $env:Path += ";C:\Program Files\Git\bin"
 $env:Path += ";C:\Program Files\nodejs"
 $env:Path += ";C:\windows\system32\config\systemprofile\AppData\Roaming\npm"
-$env:temp = ";C:\Users\$env:computername\AppData\Local\Temp"
-$env:tmp = ";C:\Users\$env:computername\AppData\Local\Temp"
-# $env:temp = ";C:\windows\system32\config\systemprofile\AppData\Local\Temp"
-# $env:tmp = ";C:\windows\system32\config\systemprofile\AppData\Local\Temp"
+
+# Add temp folder for Chromium
+mkdir C:\Users\$env:username\AppData\Local\Temp
+$env:temp = ";C:\Users\$env:username\AppData\Local\Temp"
+$env:tmp = ";C:\Users\$env:username\AppData\Local\Temp"
 
 # Install Windows 10 package manager
 Invoke-WebRequest https://chocolatey.org/install.ps1 -UseBasicParsing | Invoke-Expression
