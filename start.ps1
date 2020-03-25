@@ -4,7 +4,7 @@ $env:Path += ";C:\Program Files\Git\bin"
 $env:Path += ";C:\Program Files\nodejs"
 $env:Path += ";C:\windows\system32\config\systemprofile\AppData\Roaming\npm"
 $env:temp = ";C:\Users\$env:username\AppData\Local\Temp"
-$env:tmp = ";C:\Users$env:username\AppData\Local\Temp"
+$env:tmp = ";C:\Users\$env:username\AppData\Local\Temp"
 # $env:temp = ";C:\windows\system32\config\systemprofile\AppData\Local\Temp"
 # $env:tmp = ";C:\windows\system32\config\systemprofile\AppData\Local\Temp"
 
@@ -16,7 +16,7 @@ choco install -y git
 choco install -y nodejs.install
 
 # Clone repo
-$dir = "C:\Users\repo"
+$dir = "C:\Users\$env:username"
 git clone https://github.com/vic2019/puppeteer.git $dir 2>$null
 
 # Install node modules
