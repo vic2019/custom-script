@@ -1,29 +1,22 @@
-# Add paths
-$env:Path += ";C:\ProgramData\chocolatey\bin"
-$env:Path += ";C:\Program Files\Git\bin"
-$env:Path += ";C:\Program Files\nodejs"
-$env:Path += ";C:\windows\system32\config\systemprofile\AppData\Roaming\npm"
-$env:temp = "C:\Users\app\AppData\Local\Temp"
-$env:tmp = "C:\Users\app\AppData\Local\Temp"
-
-# Install Windows 10 package manager
 Invoke-WebRequest https://chocolatey.org/install.ps1 -UseBasicParsing | Invoke-Expression
+$env:Path += ";C:\ProgramData\chocolatey\bin"
 
-# Install Git and Node.js
 choco install -y git
-choco install -y nodejs.install
+$env:Path += ";C:\Program Files\Git\bin"
 
-# Clone repo
 $dir = "C:\Users\app\repo"
 git clone https://github.com/vic2019/puppeteer.git $dir 2>$null
 
-# Install node modules
-npm install -g pm2
+choco install -y nodejs.install
+$env:Path += ";C:\Program Files\nodejs"
+
 cd $dir
 npm install
 
-# Disable firewall for development
-Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False
+npm install -g pm2
 
-# Run
-Start-Process -FilePath "pm2" -ArgumentList "start index.js" -WorkingDirectory $dir -RedirectStandardOutput $dir\stdout.log -RedirectStandardError $dir\stderr.log
+$env:temp = "C:\Users\app\AppData\Local\Temp"
+$env:tmp = "C:\Users\app\AppData\Local\Temp"
+Start-Process -FilePath "npm" -ArgumentList "start" -WorkingDirectory $dir -RedirectStandardOutput $dir\stdout.log -RedirectStandardError $dir\stderr.log
+
+Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False
