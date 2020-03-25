@@ -14,12 +14,10 @@ $env:Path += ";C:\Program Files\nodejs"
 cd $repo
 npm install
 npm install -g pm2
-# $env:Path += ";C:\Users\app\AppData\Roaming\npm"
 $env:Path += ";C:\windows\system32\config\systemprofile\AppData\Roaming\npm"
 
-
 # Run
-$env:temp = "C:\Users\app\AppData\Local\Temp"
-$env:tmp = "C:\Users\app\AppData\Local\Temp"
+mkdir C:\windows\system32\config\systemprofile\AppData\Local\Temp
+echo "" > C:\windows\system32\config\systemprofile\AppData\Local\Temp\puppeteer_dev_chrome_profile-XXXXXX
 pm2 start index.js
 Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False
