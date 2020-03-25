@@ -21,5 +21,5 @@ $env:Path += ";C:\windows\system32\config\systemprofile\AppData\Roaming\npm"
 # Run
 $env:temp = "C:\Users\app\AppData\Local\Temp"
 $env:tmp = "C:\Users\app\AppData\Local\Temp"
-Start-Process -FilePath "pm2" -ArgumentList "start index.js" -WorkingDirectory $repo -RedirectStandardOutput $repo\stdout.log -RedirectStandardError $repo\stderr.log
+pm2 start index.js
 Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False
