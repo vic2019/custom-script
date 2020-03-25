@@ -14,6 +14,9 @@ $env:Path += ";C:\Program Files\nodejs"
 cd $repo
 npm install
 npm install -g pm2
+# $env:Path += ";C:\Users\app\AppData\Roaming\npm"
+$env:Path += ";C:\windows\system32\config\systemprofile\AppData\Roaming\npm"
+
 
 # Run
 $env:temp = "C:\Users\app\AppData\Local\Temp"
