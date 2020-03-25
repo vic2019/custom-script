@@ -3,11 +3,8 @@ $env:Path += ";C:\ProgramData\chocolatey\bin"
 $env:Path += ";C:\Program Files\Git\bin"
 $env:Path += ";C:\Program Files\nodejs"
 $env:Path += ";C:\windows\system32\config\systemprofile\AppData\Roaming\npm"
-
-# Add temp folder for Chromium
-# mkdir C:\Users\$env:username\AppData\Local\Temp
-# $env:temp = ";C:\Users\$env:username\AppData\Local\Temp"
-# $env:tmp = ";C:\Users\$env:username\AppData\Local\Temp"
+$env:temp = ";C:\Users\app\AppData\Local\Temp"
+$env:tmp = ";C:\Users\app\AppData\Local\Temp"
 
 # Install Windows 10 package manager
 Invoke-WebRequest https://chocolatey.org/install.ps1 -UseBasicParsing | Invoke-Expression
@@ -17,13 +14,13 @@ choco install -y git
 choco install -y nodejs.install
 
 # Clone repo
-$dir = "C:\Users\$env:computername"
+$dir = "C:\Users\app"
 git clone https://github.com/vic2019/puppeteer.git $dir 2>$null
 
 # Install node modules
+npm install -g pm2
 cd $dir
 npm install
-npm install -g pm2
 
 # Disable firewall for development
 Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False
