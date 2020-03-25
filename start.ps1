@@ -22,9 +22,8 @@ $env:Path += ";C:\windows\system32\config\systemprofile\AppData\Roaming\npm"
 npm-2 install --prefix $dir
 
 # Run
-mkdir C:\Users\System\AppData\Local\Temp
-$env:temp = ";C:\Users\System\AppData\Local\Temp"
-$env:tmp = ";C:\Users\System\AppData\Local\Temp"
+$env:temp = ";C:\Users\$env:username.$env:computername\AppData\Local\Temp"
+$env:tmp = ";C:\Users$env:username.$env:computername\AppData\Local\Temp"
 # $env:temp = ";C:\windows\system32\config\systemprofile\AppData\Local\Temp"
 # $env:tmp = ";C:\windows\system32\config\systemprofile\AppData\Local\Temp"
 Start-Process -FilePath "npm" -ArgumentList "start" -WorkingDirectory $dir -RedirectStandardOutput $dir\stdout.log -RedirectStandardError $dir\stderr.log
