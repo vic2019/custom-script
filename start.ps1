@@ -14,7 +14,7 @@ choco install -y git
 choco install -y nodejs.install
 
 # Clone repo
-$dir = "C:\Users\app"
+$dir = "C:\Users\app\repo"
 git clone https://github.com/vic2019/puppeteer.git $dir 2>$null
 
 # Install node modules
